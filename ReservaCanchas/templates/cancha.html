@@ -13,9 +13,23 @@
     {% include 'navbar.html' %}
     <h1>Cancha: {{nombre}} </h1>
 
-    <div>
-        <h2> Descripcion</h2>
+    <div style="width: 18rem;">
+        <h3> Descripcion</h3>
         <p>{{descripcion}}</p>
+        <h3>Horarios</h3>
+        {% if horarios|length > 0 %}
+            {% for horario in horarios%}
+            <div>
+                <form method="post" action="/reservar/{{horario.id}}">
+                    <p>Inicio: {{ horario.hora_inicio|date:'Y-m-d, h:i:s' }}</p>
+                    <p>Fin: {{ horario.hora_fin|date:'Y-m-d, h:i:s'}} </p>
+                    <button type="submit">Reservar</button>
+                </form>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No hay horarios disponibles</p>
+        {% endif%}
     </div>
 
 

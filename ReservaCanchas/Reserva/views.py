@@ -2,12 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views .generic import TemplateView
 import datetime
-from .models import Cancha
+from .models import Cancha, Horario
 # Create your views here.
 
 def getInfoCanchaById (request, id_cancha):
     cancha = Cancha.objects.get(id=id_cancha)
-    contexto = { 'nombre': cancha.nombre, 'descripcion': cancha.descripcion}
+    horarios = Horario.objects.filter(cancha__id=cancha.id)
+    contexto = { 'nombre': cancha.nombre, 
+                 'descripcion': cancha.descripcion,
+                 'horarios': horarios
+            }
     return render (request, "cancha.html", contexto)
 
 def getListadoCanchas (request):

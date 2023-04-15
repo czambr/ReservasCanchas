@@ -20,6 +20,6 @@ from Reserva import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("getInfoCanchaById/<int:id_cancha>", views.getInfoCanchaById, name = "getInfoCanchaById"),
-    path("reservas/", views.MainView.as_view()),
+    path("", views.MainView.as_view()),
     path("canchas/", views.getListadoCanchas, name = "getListadoCanchas")
 ]
