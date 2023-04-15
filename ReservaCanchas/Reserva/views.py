@@ -7,10 +7,15 @@ from .models import Cancha
 
 def getInfoCanchaById (request, id_cancha):
     cancha = Cancha.objects.get(id=id_cancha)
-    result_layout = f"<h3>Cancha: {cancha.nombre}, Descripción: {cancha.descripcion}</h3>"
+    contexto = { 'nombre': cancha.nombre, 'descripcion': cancha.descripcion}
+    return render (request, "cancha.html", contexto)
 
-    return HttpResponse(result_layout)
-
+def getListadoCanchas (request):
+    canchas = Cancha.objects.all()
+    nombre_canchas = []
+    for cancha in canchas:
+        nombre_canchas.append((cancha.id, cancha.nombre))
+    return render (request, "canchas.html", {'listado': nombre_canchas} )
 
 class MainView(TemplateView):
     template_name = "main.html"
