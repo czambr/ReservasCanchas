@@ -20,6 +20,9 @@ from Reserva import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("getInfoCanchaById/<int:id_cancha>", views.getInfoCanchaById, name = "getInfoCanchaById"),
-    path("", views.MainView.as_view()),
-    path("canchas/", views.getListadoCanchas, name = "getListadoCanchas")
+    path("", views.MainView.as_view(), name = 'landing'),
+    path("canchas/", views.getListadoCanchas, name = "getListadoCanchas"),
+    path("registro/", views.registro_request, name='registro'),
+    path("login", views.login_request, name='login'),
+    path("logout", views.logout_request, name='logout'),
 ]
